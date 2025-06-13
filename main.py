@@ -258,7 +258,7 @@ def final_pipeLine(paths):
         mask_std = detect_spikes_std(df['strain'], threshold=3)
         mask_roll = detect_spikes_rolling(df['strain'], window=5, threshold=1.5)
         mask_grad = detect_spikes_gradient(df['strain'], threshold=3)
-        spike_mask = mask_std | mask_roll | mask_grad
+        spike_mask = mask_std & mask_roll & mask_grad
         df = df[~spike_mask].reset_index(drop=True)
 
         # Step 5: stress 계산
